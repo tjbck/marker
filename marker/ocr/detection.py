@@ -19,7 +19,10 @@ def get_batch_size():
 def surya_detection(images: list, pages: List[Page], det_model, batch_multiplier=1):
     processor = det_model.processor
 
-    predictions = batch_text_detection(images, det_model, processor, batch_size=int(get_batch_size() * batch_multiplier))
+    predictions = batch_text_detection(
+        images, det_model, processor, batch_size=int(get_batch_size() * batch_multiplier), 
+        include_heatmap=False, include_affinity_map=False
+    )
     for (page, pred) in zip(pages, predictions):
         page.text_lines = pred
 
